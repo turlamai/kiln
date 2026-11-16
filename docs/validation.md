@@ -1,6 +1,6 @@
 # Validation and evidence contract
 
-Status: foundation checks are executable; compiler, target and release suites are planned.
+Status: foundation checks are executable; M1 experiments, compiler, target and release suites are planned and unrun. The current owner-authorized slice establishes contracts only.
 
 ## Evidence ladder
 
@@ -31,7 +31,7 @@ HIL jobs use protected runners, reviewed commits and exclusive board leases. Unt
 
 ## Evidence record and traceability
 
-Every acceptance record identifies requirement ID, test case, source SHA, dependency/tool pins, profile, target/board revision, OS/architecture, command, CI run URL, artifact SHA-256, observed result, threshold, timestamp and reviewer. Product evidence additionally includes hardware setup and repeat count. Store large artifacts in CI/release storage with retention stated by the release; link immutable artifacts from the issue. A changed contract requires the same review as changed behavior. M1 defines the machine-readable schema before runtime claims are admitted.
+Every acceptance record follows the proposed [evidence contract](evidence-contract.md), which owns fields, statuses and completeness rules. Product evidence additionally includes hardware setup and repeat count. Store large artifacts in CI/release storage with retention stated by the release; link immutable artifacts from the issue. A changed contract requires the same review as changed behavior. M1 must validate and freeze a machine-readable schema before runtime claims are admitted; the current field specification is not an implemented validator.
 
 ## Current commands
 
