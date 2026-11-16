@@ -1,0 +1,22 @@
+name: Architecture or investigation
+description: One bounded decision with an evidence plan
+labels: [architecture]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Problem, observable outcome and non-goals
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Alternatives, reuse and risks
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria, evidence and dependencies
+    validations:
+      required: true

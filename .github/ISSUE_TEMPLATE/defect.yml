@@ -1,0 +1,21 @@
+name: Defect
+description: A reproducible failure against a declared contract
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Commit, environment and redacted reproduction
+      description: Include host/profile/target only where applicable. No secrets or proprietary source.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected contract and observed result
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and affected requirement

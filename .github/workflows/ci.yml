@@ -1,0 +1,53 @@
+name: Foundation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: foundation-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  foundation:
+    name: Foundation (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: Bogdanp/setup-racket@2466913449df77df2bad149d1f2fc4e1ea4795dd # v1.15
+        with:
+          version: '9.3'
+          distribution: full
+          variant: CS
+          architecture: x64
+      - name: Foundation contracts and rejection regression tests
+        run: |
+          racket kiln-tools/check-foundation.rkt
+          raco test kiln-test
+      - name: Install documentation package
+        run: raco pkg install --auto --name kiln --link "$PWD"
+      - name: Check package dependency declarations
+        run: raco setup --check-pkg-deps --pkgs kiln
+      - name: Build documentation
+        run: raco scribble --htmls --dest build/manual kiln-doc/kiln.scrbl
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: foundation-manual-${{ matrix.os }}
+          path: build/manual
+          if-no-files-found: error
+          retention-days: 30
+  gate:
+    name: Foundation gate
+    if: always()
+    needs: [foundation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every host result
+        env:
+          FOUNDATION_RESULT: ${{ needs.foundation.result }}
+        run: test "$FOUNDATION_RESULT" = success
