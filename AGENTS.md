@@ -5,6 +5,8 @@ At every bounded slice read this file, [documentation map](docs/README.md), [han
 ## Invariants
 
 - Source ecosystem is ordinary Racket with official expansion and standard packages. No new dialect or package manager.
+- Default source entry is `racket/base` with ordinary `require`. Compatibility depends on actual semantics/effects/resources, not library membership. Neither full `racket/base` nor full `racket` coverage is a goal; the host retains the full Racket ecosystem.
+- Current M1 authorization is framework and contracts only: product brief, target comparison, compatibility procedure, evidence format and review gates. Do not implement probes, compiler passes or runtime code until the owner advances that scope.
 - Host implementation is Racket; the device/runtime and first backend use C. No compiler implementation before M1 feasibility review. No hidden changes to Racket semantics to satisfy resource budgets.
 - This is architecture foundation, with no working compiler or qualified target. Preserve truthful status in both public languages.
 - Contracts live in their owners listed in the documentation map. Issues own task state; ADRs own decisions. Do not duplicate queues or chat history.

@@ -12,6 +12,8 @@
 
 复用 Racket 生态**不等于**任意 Racket 包都能在 MCU 上运行。主机宏依赖与目标运行时依赖分别审查兼容性和信任边界。不计划创建新 Scheme 方言或包管理器。
 
+默认采用 `racket/base`，通过普通 `require` 按需引入库，不承诺完整支持 base。兼容性依据实际语义与资源约束判定，不追求完整 `racket`。M1 当前先完善产品 brief 和可评审契约，实验及编译器、运行时实现均未启动。
+
 ## 从这里开始
 
 当前没有可烧录产物。先阅读[架构](docs/architecture.md)、[语言契约](docs/language-contract.md)及[路线图](docs/roadmap.md)；三者为英文技术真源。使用 Racket CS 9.3 验证本阶段基础：
