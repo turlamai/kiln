@@ -10,6 +10,10 @@ Ordinary @tt{#lang racket/base} modules use the official host expander and
 standard packages. The planned pipeline checks explicit target capabilities,
 verifies intermediate representations and generates C for a pinned cross-toolchain.
 Unsupported semantics must be rejected rather than silently changed.
+The default is @tt{racket/base} with ordinary imports. Compatibility follows
+actual semantics and resource constraints; neither full base nor full
+@tt{racket} coverage is a goal. The host retains the full Racket ecosystem.
+M1 currently establishes contracts; experiments and implementation remain unstarted.
 
 @section{Canonical Contracts}
 The repository's
