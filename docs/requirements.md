@@ -20,12 +20,15 @@ Kiln enables developers to produce inspectable, reproducible MCU firmware from s
 | REQ-010 | Recover from interrupted update and watchdog/reset faults | Power-loss matrix, recovery procedure and HIL traces | M3 |
 | REQ-011 | Trace release claims to immutable evidence and licenses | SBOM, provenance, CI/HIL reports and signed manifest | M4 |
 | REQ-012 | Keep devices offline and free of platform licensing services | Dependency audit; product commerce stays outside runtime | M4 |
+| REQ-013 | Default to `racket/base` with ordinary imports; assess semantics/effects/resources without pursuing full base or full `racket` | Reviewed admission/rejection/unknown cases and traceable capability decisions | M1–M2 |
 
 ## First target decision inputs
 
 Cortex-M4/M7 with a bare-metal adapter is the initial investigation envelope, not a support commitment. Compare at least two obtainable boards for debug probes, open toolchains, documented clocks/interrupts, SDK redistribution rights, RAM/Flash headroom and access to UART, timer, ADC, PWM and CAN. Exact board, part revision, floating-point ABI and clock tree remain open until M1 evidence is reviewed. Existing STM32 experience is useful evidence, not sufficient selection justification.
 
 The first product brief must record Flash/RAM/stack ceilings, interrupt-latency limit, control deadline, fault-safe state, startup duration, update/recovery mechanism, soak duration and C baseline workload. Each value needs a rationale and measurement method. Missing values block M1 exit; this document does not invent target guarantees.
+
+The owner-approved evaluation scenario, proposed quantitative budgets, two-board comparison and remaining selection evidence are maintained in the [reference-product brief](reference-product.md). Its numbers are design targets awaiting validation, not measured capabilities. Product class, selected board and qualified hardware are separate decisions.
 
 ## Exclusions
 

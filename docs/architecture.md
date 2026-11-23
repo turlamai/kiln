@@ -32,6 +32,8 @@ flowchart TD
 
 ## Expansion and dependency control
 
+The default module language is `racket/base`; additional capabilities use ordinary `require`. The host retains full Racket tooling. Target admission depends on semantic/effect/resource analysis, with neither full `racket/base` nor full `racket` coverage as an objective. The [language contract](language-contract.md) owns this policy; the [assessment procedure](compatibility-assessment.md) defines its review boundaries. This policy is accepted independently of the proposed first runtime profile.
+
 Use official syntax objects and resolved bindings, never textual matching of names such as `+`. A macro may expand to target-supported code while using rich host libraries at expansion time. Conversely a simple-looking `require` can introduce unsupported target initialization. Walk and record module imports, phase shifts, initialization order and reachable runtime bindings. Expansion can execute host code; isolate it in a separate OS process/container with explicit filesystem/network access, time and memory limits. A Racket namespace is not an adversarial-code sandbox.
 
 Before analysis, freeze package checksums, Racket version, environment inputs and feature profile. Do not discard unknown effects during dead-code elimination to manufacture compatibility. Cross-compilation must distinguish host fixnum properties and target data layout; host evaluation must not precompute target-dependent behavior without a proof.
@@ -49,5 +51,7 @@ Kiln is a domain-specific compiler platform, not an orchestrator for the family 
 Current layout is intentionally small: `docs/` contracts and ADRs, `kiln-doc/` installable Scribble entry, `kiln-tools/` foundation checks, `kiln-test/` checker regression tests and `.github/` governance automation. When implementation is authorized, introduce separate collections for frontend, IR, backend and CLI, plus C runtime and target directories, as each gains real code. Do not create empty compiler stubs that imply working APIs. Build artifacts belong in ignored `build/`; third-party SDKs remain external pinned inputs.
 
 ## Evolution rules
+
+M1 is currently a framework-and-contract phase. The [reference-product brief](reference-product.md), compatibility procedure and [evidence contract](evidence-contract.md) must be reviewed before implementing experiments or compiler components. Proposed experiments describe future evidence; writing their plan does not authorize a compiler sprint or establish a passing result.
 
 Passes consume validated versions and either produce valid output or fail with a diagnostic. No partially emitted firmware is a successful build. Versioned IR and ABI remain internal until demonstrated by real consumers; avoid premature binary compatibility promises. A later backend must reuse the same semantic oracle and capability rules. Native C is the only initial backend; VM and direct native backends require new ADRs and product evidence.

@@ -12,6 +12,8 @@ Use ordinary `#lang racket/base` modules, Racket's official expander, packages, 
 
 Racket ecosystem reuse does **not** imply that arbitrary Racket packages run on a microcontroller. Host macros and target runtime dependencies have separate compatibility and trust requirements. No new Scheme dialect or package manager is planned.
 
+`racket/base` is the default entry with ordinary `require`, not a promise of complete base support. Compatibility depends on actual semantics and resource constraints. Complete `racket` support is not a goal. M1 currently develops the product brief and reviewable contracts; experiments and compiler/runtime implementation have not started.
+
 ## Start here
 
 There is nothing to flash yet. Read the [architecture](docs/architecture.md), [language contract](docs/language-contract.md) and [roadmap](docs/roadmap.md). To validate this foundation with Racket CS 9.3:
