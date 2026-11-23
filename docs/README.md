@@ -1,6 +1,6 @@
 # Documentation map
 
-Each subject has one canonical owner. All specifications are revision 0, dated 2026-11-16. Accepted direction does not mean implemented behavior.
+Each subject has one canonical owner. Foundation baseline: 2026-11-16; source-policy clarification and M1 framework added on the same date. Accepted direction does not mean implemented behavior. Proposed budgets and evidence formats remain subject to review.
 
 | Question | Canonical owner |
 | --- | --- |
@@ -8,9 +8,12 @@ Each subject has one canonical owner. All specifications are revision 0, dated 2
 | What must the platform deliver? | [Requirements](requirements.md) |
 | Which layer owns a responsibility? | [Architecture](architecture.md) |
 | What does accepting Racket mean? | [Language contract](language-contract.md) |
+| How is a program assessed against that contract? | [Compatibility assessment](compatibility-assessment.md) |
+| What is the first reference-product workload and target choice? | [Reference-product brief](reference-product.md) |
 | What crosses compiler passes? | [IR contract](ir.md) |
 | What crosses the device C boundary? | [Runtime and hardware contracts](runtime-and-hardware.md) |
 | What counts as proof? | [Validation and evidence](validation.md) |
+| What must one evidence record contain? | [Evidence contract](evidence-contract.md) |
 | What can go wrong? | [Risk register](risks.md) |
 | Why these choices? | [ADR index](adr/README.md) |
 | What is the phase sequence? | [Roadmap](roadmap.md) |

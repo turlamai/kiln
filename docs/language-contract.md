@@ -1,10 +1,18 @@
 # Racket compatibility contract
 
-Status: proposed profile `core-static-0`; every row is unimplemented. No current source input can be compiled to an MCU by Kiln.
+Status: source policy accepted, clarified 2026-11-16; proposed profile `core-static-0` is unimplemented. No current source input can be compiled to an MCU by Kiln.
 
 ## Compatibility rule
 
-The source language remains `#lang racket/base`. Kiln accepts a program only if its reachable runtime operations and module initialization are covered by a declared profile. It preserves Racket behavior for accepted executions or emits a compile-time diagnostic explaining why it cannot. A profile restricts accepted programs, not the meaning of accepted Racket operations. Unsupported inputs must never silently fall back to host execution or be approximated as C behavior.
+The default source entry is `#lang racket/base`, with ordinary `require` for additional libraries. Neither complete `racket/base` coverage nor complete `racket` coverage is a platform goal. Compatibility is determined by actual semantics, transitive runtime effects and resource obligations, not by the language name or library membership. Host expansion, development tools, tests and documentation retain the full host Racket ecosystem.
+
+Kiln accepts a program only if its reachable runtime operations and required module initialization are covered by a declared profile and its resource obligations are discharged for the named target/input domain. It preserves Racket behavior for accepted executions or emits a diagnostic explaining why it cannot. A profile restricts accepted programs, not the meaning of accepted Racket operations. Unsupported inputs must never silently fall back to host execution or be approximated as C behavior.
+
+`racket/base` is not a static-memory or real-time language variant. A module using it may still require unsupported allocation, continuations or OS behavior. Conversely, a library outside it may expand to operations that the target profile supports. `racket/match`, for example, is eligible for evaluation; this is not a current support claim. Do not whitelist everything in base or blacklist everything outside base.
+
+Accepting `#lang racket` as a future convenience requires its own dependency/initialization evidence. Merely accepting that spelling would not promise the combined library's runtime features. No implementation phase is required to pursue it.
+
+The operational decision sequence and cases live in [compatibility assessment](compatibility-assessment.md); this document remains the normative owner of language meaning.
 
 | Feature | Proposed initial treatment | Required positive/negative evidence |
 | --- | --- | --- |
